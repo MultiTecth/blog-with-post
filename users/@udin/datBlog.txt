@@ -1,0 +1,5 @@
+a:4:{i:0;a:4:{s:2:"id";s:2:"16";s:4:"blog";s:20:"<p>anjay mabar</p>
+";s:6:"idUser";s:2:"57";s:4:"date";s:10:"2023-04-03";}i:1;a:1:{i:0;a:4:{s:2:"id";s:2:"18";s:4:"blog";s:33:"<p>awd awd awd awd awd aw d</p>
+";s:6:"idUser";s:2:"57";s:4:"date";s:10:"2023-04-03";}}i:2;a:1:{i:0;a:4:{s:2:"id";s:2:"18";s:4:"blog";s:33:"<p>awd awd awd awd awd aw d</p>
+";s:6:"idUser";s:2:"57";s:4:"date";s:10:"2023-04-03";}}i:3;a:1:{i:0;a:4:{s:2:"id";s:2:"18";s:4:"blog";s:33:"<p>awd awd awd awd awd aw d</p>
+";s:6:"idUser";s:2:"57";s:4:"date";s:10:"2023-04-03";}}}

@@ -1,11 +1,12 @@
-<?php 
+<?php
 session_start();
 $konek = '../../login/db_conn.php';
 include $konek;
 include '../../login/output_gambar/id.php';
-$koneksi = mysqli_connect("localhost", "root", "", "pkl");
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest"){
-
+// include './getDataBlog.php';
+$koneksi = mysqli_connect("localhost", "root", "root", "pkl2", 8888);
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest") {
+  include './getDataBlog.php';
   $id = $_SESSION['id'];
   $user_name = $_SESSION['user_name'];
   $email = $_SESSION['email'];
@@ -16,7 +17,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
   $h = "<img src='../../img/guest.jpg' alt='' width='50' class='rounded-circle'>";
   $atr = "alt='' width='50' class='rounded-circle'";
   $photo_profile = profile($id, $h, $konek, $atr);
-}?>
+} else {
+  $_SESSION['id'] = "guest";
+}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -28,11 +32,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
   <link rel="stylesheet" href="../../css/boostrap/homepage.css">
   <link rel="stylesheet" href="../../css/nav.css">
 
-  <link href="../../css/boostrap/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <link href="../../css/boostrap/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 </head>
 
-<body> 
+<body>
   <div class="jumbotron">
     <div class="navbar">
       <div class="nav-menu">
@@ -45,8 +48,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
             <li><a href="../home/">Home</a></li>
             <li><a href="../About/">About</a></li>
             <div class="dropdown-center">
-              <button class="btn text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <button class="btn text-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Browse
               </button>
               <ul class="dropdown-menu">
@@ -68,68 +70,70 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
         </div>
 
         <!-- Sudah login -->
-        <?php if((isset($_SESSION['id']) && isset($_SESSION['user_name']) && !($_SESSION['id'] == "guest" && $_SESSION['user_name'] == "guest"))){?>
-        <div class="profil">
-          <div class="dropdown">
-            <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
-              <?=$photo_profile;?>
-            </a>
-            <ul class="dropdown-menu">
-              <div class="profil-picture">
+        <?php if ((isset($_SESSION['id']) && isset($_SESSION['user_name']) && !($_SESSION['id'] == "guest" && $_SESSION['user_name'] == "guest"))) { ?>
+          <div class="profil">
+            <div class="dropdown">
+              <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
-                <?=$photo_profile;?>
-                <span class="username">
-                  <h4><?=$user_name?></h4>
-                  <h6><?=$email?></h6>
-                </span>
-              </div>
-              <li><a class="dropdown-item" href="../../users/index.php"><button><div class="user-icon"><img src="../assets/user.png" alt=""></div>Profile</button></a></li>
-              <li>
-                <a class="dropdown-item" href="#"><button><div class="saved"><img src="../assets/save-instagram.png" alt=""></div>Favorite</button></a>
-              </li>
-              <li class="dropdown-item" href="">
-                <a href="../../login/index.php">
-                <button>
-                  <div class="rotate">
-                    <img src="../assets/rotate.png" alt="">
-                  </div>Change Account
-                </button>
-                </a>
-              </li>
-              <li class="dropdown-item"><a href="../../login/logout.php"><button><div class="exit"><img src="../assets/Sign_out_squre_light.png" alt=""></div>Log Out</button></a></li>
-            </ul>
+                <?= $photo_profile; ?>
+              </a>
+              <ul class="dropdown-menu">
+                <div class="profil-picture">
+                  <!-- <img src="../assets/profillogin/❝ save __ follow ❞ 2.png" alt="" width="50" class="rounded-circle"> -->
+                  <?= $photo_profile; ?>
+                  <span class="username">
+                    <h4><?= $user_name ?></h4>
+                    <h6><?= $email ?></h6>
+                  </span>
+                </div>
+                <li><a class="dropdown-item" href="../../users/index.php"><button>
+                      <div class="user-icon"><img src="../assets/user.png" alt=""></div>Profile
+                    </button></a></li>
+                <li>
+                  <a class="dropdown-item" href="#"><button>
+                      <div class="saved"><img src="../assets/save-instagram.png" alt=""></div>Favorite
+                    </button></a>
+                </li>
+                <li class="dropdown-item" href="">
+                  <a href="../../login/index.php">
+                    <button>
+                      <div class="rotate">
+                        <img src="../assets/rotate.png" alt="">
+                      </div>Change Account
+                    </button>
+                  </a>
+                </li>
+                <li class="dropdown-item"><a href="../../login/logout.php"><button>
+                      <div class="exit"><img src="../assets/Sign_out_squre_light.png" alt=""></div>Log Out
+                    </button></a></li>
+              </ul>
+            </div>
           </div>
-        </div>
-        
-        <?php } else {?>
-        <!-- Belum login --> 
-        <div class="profil">
-          <div class="dropdown">
-            <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <img src="../../img/guest.jpg" alt="" width="50"
-                class="rounded-circle">
-            </a>
-            <ul class="dropdown-menu">
-              <div class="profil-picture">
-                <img src="../../img/guest.jpg" alt="" width="50"
-                  class="rounded-circle">
-                <span class="username">
-                  <h4>Guest</h4>
-                </span>
-              </div>
-              <li><a class="dropdown-item" href="../../login/index.php"><button>Login</button></a></li>
-              <li><a class="dropdown-item" href="../../login/register.php"><button>SignUp</button></a></li>  
-            </ul>
+
+        <?php } else { ?>
+          <!-- Belum login -->
+          <div class="profil">
+            <div class="dropdown">
+              <a class="btn text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../../img/guest.jpg" alt="" width="50" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu">
+                <div class="profil-picture">
+                  <img src="../../img/guest.jpg" alt="" width="50" class="rounded-circle">
+                  <span class="username">
+                    <h4>Guest</h4>
+                  </span>
+                </div>
+                <li><a class="dropdown-item" href="../../login/index.php"><button>Login</button></a></li>
+                <li><a class="dropdown-item" href="../../login/register.php"><button>SignUp</button></a></li>
+              </ul>
+            </div>
           </div>
-        </div> 
-        <?php }?>
+        <?php } ?>
       </div>
 
-      
-    </div> 
+
+    </div>
   </div>
   <div class="jmb-container">
     <img src="../assets/background.jpg" alt="">
@@ -208,22 +212,17 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
         <h3>For You</h3>
       </div>
       <div class="news">
-        <div class="news-title">
-          <h3>NEWS </h3><span class="line"></span>
-        </div>
-        <div class="card-container">
-          <!-- Card1 -->
-          <div class="card">
-            <div class="image"><img
-                src="../assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
-                alt=""></div>
-            <div class="text">
-              <p>
-                Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
-              </p>
-            </div>
-          </div>
+        <!-- <div class="news-title">
+          <h3>The blogs of <?php echo $user_name ?></h3><span class="line"></span>
+        </div> -->
 
+        <div class="card-container">
+          <?php
+          if ($_SESSION['id'] == 'guest') {
+          ?>
+            <div class="news-title">
+              <h3>NEWS </h3><span class="line"></span>
+            </div>
           <!-- Card2 -->
           <div class="card">
             <div class="image"><img src="../assets/imagenews/56-1-1628768698 1.png" alt=""></div>
@@ -233,7 +232,6 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
               </p>
             </div>
           </div>
-
           <!-- Card3 -->
           <div class="card">
             <div class="image"><img
@@ -246,6 +244,22 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
             </div>
           </div>
           <!-- Close Card -->
+          <?php } else { ?>
+            <div class="news-title">
+              <h3>The blogs of <?php echo $user_name ?></h3><span class="line"></span>
+            </div>
+            <?php foreach ($showDatBlog as $result) : ?>
+              <!-- Card1 -->
+              <div class="card">
+                <div class="image"><img src="../assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png" alt=""></div>
+                <div class="text">
+                  <?php echo $result['blog'] ?>
+                </div>
+              </div>
+            <?php endforeach; ?>
+
+          <?php } ?>
+
         </div> <!-- Closing tag container card -->
         <div class="novel">
           <div class="novel-title">
@@ -254,9 +268,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
           <div class="card-container">
             <!-- Card1 -->
             <div class="card">
-              <div class="image"><img
-                  src="../assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
-                  alt=""></div>
+              <div class="image"><img src="../assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png" alt=""></div>
               <div class="text">
                 <p>
                   Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
@@ -276,9 +288,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
 
             <!-- Card3 -->
             <div class="card">
-              <div class="image"><img
-                  src="../assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
-                  alt=""></div>
+              <div class="image"><img src="../assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png" alt=""></div>
               <div class="text">
                 <p>
                   Ramai-ramai Tolak Timnas Israel ke Indonesiah
@@ -297,9 +307,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
           <div class="card-container">
             <!-- Card1 -->
             <div class="card">
-              <div class="image"><img
-                  src="../assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png"
-                  alt=""></div>
+              <div class="image"><img src="../assets/imagenews/polisi-tangkap-2-remaja-tawuran-pakai-batu-dibungkus-sarung-0uHRPya0uP 1.png" alt=""></div>
               <div class="text">
                 <p>
                   Polisi Tangkap 2 Remaja Tawuran Pakai Batu Dibungkus Sarung
@@ -319,9 +327,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
 
             <!-- Card3 -->
             <div class="card">
-              <div class="image"><img
-                  src="../assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png"
-                  alt=""></div>
+              <div class="image"><img src="../assets/imagenews/flp-tolak-timnas-israel-fifa-u20-2023-768x511-64214ed94addee4dc04e1d22 1.png" alt=""></div>
               <div class="text">
                 <p>
                   Ramai-ramai Tolak Timnas Israel ke Indonesiah
@@ -358,10 +364,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
                 His Defiant Concubine
               </p>
             </div> -->
-          </div><!-- Close Card -->
-        </div> <!-- Closing tag container card -->
-      </div>
+        </div><!-- Close Card -->
+      </div> <!-- Closing tag container card -->
     </div>
+  </div>
   </div>
   <footer>
     <div class="footer-bottom">
@@ -369,9 +375,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] !=
     </div>
   </footer>
   <!-- SCRIPT -->
-  <script src="../../js/bootstrap.bundle.min.js"
-    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-    crossorigin="anonymous"></script>
+  <script src="../../js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </body>
 
 </html>

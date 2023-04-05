@@ -9,9 +9,11 @@ $user_data = $_SESSION['data'];
 
 
 mkdir("../users/@".$uname);
-$src = "../admin/update_users";
+$src = "../admin/update_users/index.php";
+$blog = '../admin/update_users/blog.php';
 
 custom_copy($src, "../users/@".$uname);
+custom_copy($blog, '../users/@'.$uname);
 
 $img_name = $_SESSION['img_name'];
 if($img_name != ''){

@@ -3,7 +3,7 @@
   $konek = '../../login/db_conn.php';
   include $konek;
   include '../../login/output_gambar/id.php';
-  $koneksi = mysqli_connect("localhost", "root", "", "pkl");
+  $koneksi = mysqli_connect("localhost", "root", "root", "pkl2",8888);
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest"){
 
     $id = $_SESSION['id'];
