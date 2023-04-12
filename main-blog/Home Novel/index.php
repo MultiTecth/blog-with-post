@@ -9,7 +9,7 @@
   include '../../function.php';
 
   // Connect ke database pkl
-  $koneksi = mysqli_connect("localhost", "root", "", "pkl");
+  // $koneksi = mysqli_connect("localhost", "root", "", "pkl");
 
   // Jika sudah login
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && $_SESSION['id'] != "guest"){
